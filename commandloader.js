@@ -1,4 +1,4 @@
-const config = require('./src/configs/config')
+const config = require('./src/config/config.json')
 const { REST, Routes } = require('discord.js');
 const token = config.token;
 const clientId = config.clientID;

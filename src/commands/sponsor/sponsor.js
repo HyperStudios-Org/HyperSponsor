@@ -1,6 +1,6 @@
-const {EmbedBuilder, SlashCommandBuilder, PermissionFlagsBits} = require("discord.js")
+const {EmbedBuilder, SlashCommandBuilder, PermissionFlagsBits} = require('discord.js')
 const database = require ("mongoose")
-const config = require("src/configs/commands/config/config.json")
+const config = require('../../config/config.json')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -9,7 +9,7 @@ module.exports = {
 .addUserOption( option => option
     .setName("user") 
     .setDescription("L'utente che ha richiesto la sponsor.")
-    .setRequire(true)
+    .setRequired(true)
 ),
 
 async execute(interaction) {

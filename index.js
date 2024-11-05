@@ -1,4 +1,4 @@
-const config = require('src/configs/commands/config/config.json')
+const config = require('./src/config/config.json')
 const mongoose = require('mongoose');
 const { Client, GatewayIntentBits, Collection, ActivityType, Partials, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
@@ -38,7 +38,7 @@ const token = config.token; // Inserisci il tuo token qui
 const prefix = config.prefix; // Puoi cambiare il prefisso a tuo piacimento
 const mongodb = config.mongodb // inserisci il file mongodb
 
-const eventsPath = path.join(__dirname, 'src/events');
+const eventsPath = path.join(__dirname, './src/events');
 
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
@@ -60,7 +60,7 @@ for (const file of eventFiles) {
 
 }
 
-const foldersPath = path.join(__dirname, 'src/commands');
+const foldersPath = path.join(__dirname, './src/commands');
 const commandFolders = fs.readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
