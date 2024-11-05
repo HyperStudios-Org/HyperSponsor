@@ -1,6 +1,5 @@
-const config = require('./src/configs/config.json')
+const config = require('src/configs/commands/config/config.json')
 const mongoose = require('mongoose');
-const chalk = require('chalk');
 const { Client, GatewayIntentBits, Collection, ActivityType, Partials, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
@@ -28,9 +27,9 @@ const client = new Client({
 module.exports = { client }
 
 
-console.log(chalk.red(`© Hyper Studios | 2024 - ${new Date().getFullYear()}`))
-console.log(chalk.red('Version:'), chalk.red('0.2V'), chalk.blue('| Developer State'))
-console.log(chalk.red(`All rights reserved`))
+console.log((`© Hyper Studios | 2024 - ${new Date().getFullYear()}`))
+console.log(('Version:'), ('0.2V'), ('| Developer State'))
+console.log((`All rights reserved`))
 
 
 client.commands = new Collection();
@@ -73,7 +72,7 @@ for (const folder of commandFolders) {
     if ('data' in command && 'execute' in command) {
       client.commands.set(command.data.name, command);
     } else {
-      console.log(chalk.red(`Il file`), chalk.green(`${filePath}`), chalk.red('Non è stato trovato'));
+      console.log((`Il file`), (`${filePath}`), ('Non è stato trovato'));
     }
   }
 }
@@ -98,16 +97,16 @@ client.once('ready', async () => {
   try {
     await mongoose.connect(mongodb || '')
     if (mongoose.connect) {
-      console.log(chalk.green('Database connesso!'));
+      console.log(('Database connesso!'));
     } else {
-      console.log(chalk.red('È stato rilevato un problema nella connessione del database perfavore controlla se gli ip sono in whitelist, e controlla se il link del database e giusto!'));
+      console.log(('È stato rilevato un problema nella connessione del database perfavore controlla se gli ip sono in whitelist, e controlla se il link del database e giusto!'));
     }
   } catch (err) {
     console.log(err)
   }
 
 
-  console.log(chalk.green(`Client connesso con ${client.user.tag}!`));
+  console.log((`Client connesso con ${client.user.tag}!`));
 });
 
 
