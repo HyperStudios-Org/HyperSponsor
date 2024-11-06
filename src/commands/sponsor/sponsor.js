@@ -11,7 +11,7 @@ module.exports = {
     .setDescription("Crea una nuova sponsor")
     .addUserOption(Option => Option
         .setName("User")
-        .setDescription("L'utente che ha richiesyo la sponsor.")
+        .setDescription("L'utente che ha richiesto la sponsor.")
     )
 )
 .addSubcommand (subCommand => subCommand
@@ -19,11 +19,11 @@ module.exports = {
     .setDescription("Elimina una sponsor.")
     .addStringOption(option => option
         .setName("ID")
-        .setDescription("L'Id della partner che vuoi eliminare.")
+        .setDescription("L'Id della sponsor che vuoi eliminare.")
     )
 .addSubcommand (subCommand => subCommand
     .setName("Info")
-    .setDescription("Ottieni tutte le informazioni sulle sponsor.")
+    .setDescription("Ottieni tutte le informazioni di una sponsor.")
 )
 )
 
