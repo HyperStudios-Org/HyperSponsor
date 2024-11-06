@@ -6,7 +6,8 @@ const sponsor = require('.src/commands/sponsor/sponsor.js')
 module.exports = {
     data: new SlashCommandSubcommandBuilder ()
     .setName("Info")
-    .setDescription("Ottieni tutte le informazioni sulle sponsor."),
+    .setDescription("Ottieni tutte le informazioni sulle sponsor.")
+    .setRequired(true),
 
     async execute(interaction) {
         const embed = new EmbedBuilder()
