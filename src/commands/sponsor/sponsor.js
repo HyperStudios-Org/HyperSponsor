@@ -5,15 +5,28 @@ const config = require('../../config/config.json')
 module.exports = {
     data: new SlashCommandBuilder()
 .setName("sponsor")
-.setDescription("Invia una sponsor.")
-.addUserOption( option => option
-    .setName("user") 
-    .setDescription("L'utente che ha richiesto la sponsor.")
-    .setRequired(true)
-),
+.setDescription("comandi sponsor")
+.addSubcommand (subCommand => subCommand
+    .setName("Add")
+    .setDescription("Crea una nuova sponsor")
+    .addUserOption(Option => Option
+        .setName("User")
+        .setDescription("L'utente che ha richiesyo la sponsor.")
+    )
+)
+.addSubcommand (subCommand => subCommand
+    .setName("Delete")
+    .setDescription("Elimina una sponsor.")
+    .addStringOption(option => option
+        .setName("ID")
+        .setDescription("L'Id della partner che vuoi eliminare.")
+    )
+.addSubcommand (subCommand => subCommand
+    .setName("Info")
+    .setDescription("Ottieni tutte le informazioni sulle sponsor.")
+)
+)
 
-async execute(interaction) {
-const user = interaction.option.getUser("user")
 
 
 
@@ -26,5 +39,5 @@ const user = interaction.option.getUser("user")
 
 
 
-},
+
 }
