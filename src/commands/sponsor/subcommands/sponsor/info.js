@@ -1,13 +1,11 @@
 const {EmbedBuilder, SlashCommandBuilder, PermissionFlagsBits, SlashCommandSubcommandBuilder} = require('discord.js')
 const database = require ("mongoose")
-const config = require('../../../config.json')
-const sponsor = require('.src/commands/sponsor/sponsor.js')
+const config = require('../../../../configs/config')
 
 module.exports = {
     data: new SlashCommandSubcommandBuilder ()
     .setName("info")
-    .setDescription("Ottieni tutte le informazioni sulle sponsor.")
-    .setRequired(true),
+    .setDescription("Ottieni tutte le informazioni sulle sponsor."),
 
     async execute(interaction) {
         const embed = new EmbedBuilder()

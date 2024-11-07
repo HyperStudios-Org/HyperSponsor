@@ -127,10 +127,18 @@ client.on('interactionCreate', async (interaction, client) => {
   
   
     try{
+
+      await interaction.deferReply({ ephemeral: true})
       await command.execute(interaction, client)
+
     } catch(err) {
       console.log(err)
-      await interaction.reply("errore durante l'esecuzione del comando")
+      if (interaction.deferred || interaction.replied) {
+        await interaction.editReply({content: "errore durante l'esecuzione del comando", ephemeral: true})
+      } else  {
+        await interaction.reply({content: "errore durante l'esecuzione del comando", ephemeral: true})
+      }
+
   
     }
   }

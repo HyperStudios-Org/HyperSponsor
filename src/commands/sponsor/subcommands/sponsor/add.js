@@ -1,7 +1,6 @@
-const {EmbedBuilder, SlashCommandBuilder, PermissionFlagsBits, SlashCommandSubcommandBuilder, ModalBuilder, TextInputBuilder, TextInputStyle} = require('discord.js')
+const {EmbedBuilder, SlashCommandBuilder, PermissionFlagsBits, SlashCommandSubcommandBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder} = require('discord.js')
 const database = require ("mongoose")
-const config = require('../../../config.json')
-const sponsor = require('./src/commands/sponsor/sponsor.js')
+const config = require('../../../../configs/config')
 const { execute } = require('./info')
 
 
@@ -9,21 +8,25 @@ module.exports = {
     data: new SlashCommandSubcommandBuilder ()
     .setName("add")
     .setDescription("Crea una sponsor.")
-    .addUserOption (option => option
-        .setName("User")
+    .addUserOption(option => option
+        .setName("user")
         .setDescription("L'utente che ha richiesto la sponsor.")
         .setRequired(true)
     )
     .addStringOption(option => option
-        .setName("Nome")
+        .setName("nome")
         .setDescription("Il nome del server.")
         .setRequired(true)
     ),
     
     async execute(interaction) {
         const Author = interaction.user;
-        const User = interaction.options("User");
-        const Name = interaction.options.getString("Nome");
+        const User = interaction.options.getUser("user");
+        const Name = interaction.options.getString("nome");
+
+        if (!interaction.deferred && !interaction.replied) {
+            await interaction.editReply({ ephemeral: true})
+        }
 
         const descriptionModal = new ModalBuilder()
             .setCustomId("Descrizione")
@@ -32,20 +35,20 @@ module.exports = {
         const descriptionInput = new TextInputBuilder()
             .setCustomId("descriptionInput")
             .setLabel("Inserisci la descrizione del server.")
-            .setPlaceholder("Inserisci la descrizione del server.")
+            .setPlaceholder("Descrizione del server.")
             .setStyle(TextInputStyle.Paragraph);
 
-            const ActionRow = new ActionRowBuilder().addComponents(Descrizione)
+            const ActionRow = new ActionRowBuilder().addComponents(descriptionInput);
 
             descriptionModal.addComponents(ActionRow)
             await interaction.showModal(descriptionModal)
 
             if (interaction.customId === 'Descrizione') {
-                const   
-         inputValue = interaction.fields.getTextInputValue('descriptionInput')}
+                const inputValue = interaction.fields.getTextInputValue('descriptionInput')
+            }
 
         
-        let Members;
+        let Members = 300;
         let Category;
 
         switch(Members) {
@@ -76,12 +79,12 @@ module.exports = {
 <:mono_user_HY:1291050967604658276> **Owner:** ${User}
 <:HY_home:1280658819164410030> **Server:** ${Name}
 ─────────────────`)
-            .setFooter ("HyperSponsor")
+            .setFooter ({ text: "HyperSponsor"})
             .setTimestamp()
         
-        await User.setNickname(`${Name}︲${User.displayName}`)
+        // await User.setNickname(`${Name}︲${User.displayName}`)
         await newChannel.permissionOverwrites.edit(interaction.guild.id, { SendMessages: false })
-        await interaction.reply(`✅ Canale creato con successo: <#${newChannel.id}>`)
+        await interaction.editeply({ content: `✅ Canale creato con successo: <#${newChannel.id}>`})
         await newChannel.send(inputValue)
         await newChannel.send({embed: [embed]})
 

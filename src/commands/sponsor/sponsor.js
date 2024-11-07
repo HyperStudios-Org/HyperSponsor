@@ -1,7 +1,7 @@
 const {EmbedBuilder, SlashCommandBuilder, PermissionFlagsBits} = require('discord.js')
 const database = require ("mongoose")
-const config = require('../../configs/config.json')
-const addSubcommand = require('../commands/sponsor/subcommand/sponsor/add.js')
+const config = require('../../configs/config')
+const addSubcommand = require('../sponsor/subcommands/sponsor/add')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -11,12 +11,12 @@ module.exports = {
 .addSubcommand (command => command.setName('add')
     .setDescription('add')
     .addUserOption (option => option
-        .setName("User")
+        .setName("user")
         .setDescription("L'utente che ha richiesto la sponsor.")
         .setRequired(true)
 )
 .addStringOption(option => option
-    .setName("Nome")
+    .setName("nome")
     .setDescription("Il nome del server.")
     .setRequired(true)
 ))
