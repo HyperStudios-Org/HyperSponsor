@@ -25,10 +25,15 @@ module.exports = {
 async execute(interaction) {
     const subcommand = interaction.options.getSubcommand();
     
+    if (!interaction.replied && !interaction.deferred) {
+        await interaction.deferReply({ ephemeral: true });
+    }
+
     if (subcommand === 'add') {
         await addSubcommand.execute(interaction);
     }
 }
+
 
 
 
