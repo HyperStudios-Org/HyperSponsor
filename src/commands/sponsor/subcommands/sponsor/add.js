@@ -1,13 +1,13 @@
 const {EmbedBuilder, SlashCommandBuilder, PermissionFlagsBits, SlashCommandSubcommandBuilder, ModalBuilder, TextInputBuilder, TextInputStyle} = require('discord.js')
 const database = require ("mongoose")
 const config = require('../../../config.json')
-const sponsor = require('.src/commands/sponsor/sponsor.js')
+const sponsor = require('./src/commands/sponsor/sponsor.js')
 const { execute } = require('./info')
 
 
 module.exports = {
     data: new SlashCommandSubcommandBuilder ()
-    .setName("Add")
+    .setName("add")
     .setDescription("Crea una sponsor.")
     .addUserOption (option => option
         .setName("User")
@@ -25,7 +25,7 @@ module.exports = {
         const User = interaction.options("User");
         const Name = interaction.options.getString("Nome");
 
-        const description = new ModalBuilder()
+        const descriptionModal = new ModalBuilder()
             .setCustomId("Descrizione")
             .setTitle("Descrizione");
 
@@ -37,8 +37,12 @@ module.exports = {
 
             const ActionRow = new ActionRowBuilder().addComponents(Descrizione)
 
-            description.addComponents(ActionRow)
-            await interaction.showModal(description)
+            descriptionModal.addComponents(ActionRow)
+            await interaction.showModal(descriptionModal)
+
+            if (interaction.customId === 'Descrizione') {
+                const   
+         inputValue = interaction.fields.getTextInputValue('descriptionInput')}
 
         
         let Members;
@@ -60,12 +64,26 @@ module.exports = {
         }
 
         const newChannel = await interaction.guild.channels.create({
-            name: Name,
+            name: `︲${Name}`,
             type: 0,
             parent: Category,
         })
+
+        const embed = new EmbedBuilder()
+            .setTitle("Sponsor")
+            .setColor("Blue")
+            .setDescription(`─────── <:mono_megaphone_HY:1291050226894770289>  ───────
+<:mono_user_HY:1291050967604658276> **Owner:** ${User}
+<:HY_home:1280658819164410030> **Server:** ${Name}
+─────────────────`)
+            .setFooter ("HyperSponsor")
+            .setTimestamp()
+        
+        await User.setNickname(`${Name}︲${User.displayName}`)
         await newChannel.permissionOverwrites.edit(interaction.guild.id, { SendMessages: false })
         await interaction.reply(`✅ Canale creato con successo: <#${newChannel.id}>`)
+        await newChannel.send(inputValue)
+        await newChannel.send({embed: [embed]})
 
 
 

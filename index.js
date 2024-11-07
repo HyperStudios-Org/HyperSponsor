@@ -1,4 +1,4 @@
-const config = require('./src/config.json')
+const config = require('./src/configs/config.json')
 const mongoose = require('mongoose');
 const { Client, GatewayIntentBits, Collection, ActivityType, Partials, EmbedBuilder } = require('discord.js');
 const fs = require('fs');

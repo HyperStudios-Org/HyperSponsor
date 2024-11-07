@@ -5,7 +5,7 @@ const sponsor = require('.src/commands/sponsor/sponsor.js')
 
 module.exports = {
     data: new SlashCommandSubcommandBuilder ()
-    .setName("Info")
+    .setName("info")
     .setDescription("Ottieni tutte le informazioni sulle sponsor.")
     .setRequired(true),
 
