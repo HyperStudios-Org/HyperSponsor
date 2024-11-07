@@ -3,7 +3,6 @@ const { REST, Routes } = require('discord.js');
 const token = config.token;
 const clientId = config.clientID;
 const fs = require('node:fs');
-const chalk = require('chalk');
 const path = require('node:path');
 
 const commands = [];
